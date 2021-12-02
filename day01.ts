@@ -5,41 +5,19 @@ const inputToInts = (input: string): number[] => {
 };
 
 export const day01a: Solution = (input: string): string => {
-    const [a, b] = findSumPair(2020, inputToInts(input));
-    return String(a * b);
+    return String(countIncreases(inputToInts(input)));
 };
 
 export const day01b: Solution = (input: string): string => {
-    const [a, b, c] = findSumTriplet(2020, inputToInts(input));
-    return String(a * b * c);
+    return "";
 };
 
-const findSumPair = (target: number, values: number[]): [number, number] => {
-    const seen: Record<number, boolean> = {};
-    for (const value of values) {
-        const missing = target - value;
-        if (seen[missing]) {
-            return [missing, value];
-        }
-        seen[value] = true;
-    }
-    throw "Not found";
-};
-
-const findSumTriplet = (
-    target: number,
-    values: number[],
-): [number, number, number] => {
+const countIncreases = (values: number[]): number => {
+    let curr = 0;
+    let count = 0;
     for (let i = 0; i < values.length; i++) {
-        const value = values[i];
-        const remainingValues = values.slice();
-        remainingValues.splice(i, 1);
-        try {
-            const [a, b] = findSumPair(target - value, remainingValues);
-            return [value, a, b];
-        } catch (e) {
-            continue;
-        }
+        if (values[i] > curr) count++;
+        curr = values[i];
     }
-    throw "Not found";
+    return count - 1; // Remove initial.
 };
