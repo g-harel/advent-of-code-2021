@@ -2004,9 +2004,9 @@ const input = `
 `.trim();
 
 test("day01a", () => {
-    expect(day01a(input)).toBe("7");
+    expect(day01a(input)).toBe("1233");
 });
 
 test("day01b", () => {
-    expect(day01b(input)).toBe("");
+    expect(day01b(input)).toBe("1275");
 });

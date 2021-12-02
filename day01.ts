@@ -1,23 +1,19 @@
+import {inputToInts} from "./lib";
 import {Solution} from "./types";
 
-const inputToInts = (input: string): number[] => {
-    return input.split("\n").map(Number);
-};
-
 export const day01a: Solution = (input: string): string => {
-    return String(countIncreases(inputToInts(input)));
+    return String(countWindowIncreases(inputToInts(input), 1));
 };
 
 export const day01b: Solution = (input: string): string => {
-    return "";
+    return String(countWindowIncreases(inputToInts(input), 3));
 };
 
-const countIncreases = (values: number[]): number => {
-    let curr = 0;
+const countWindowIncreases = (values: number[], window: number): number => {
     let count = 0;
-    for (let i = 0; i < values.length; i++) {
-        if (values[i] > curr) count++;
-        curr = values[i];
+    for (let i = window; i < values.length; i++) {
+        // Only compare values at edges (not overlapping).
+        if (values[i] > values[i-window]) count++;
     }
-    return count - 1; // Remove initial.
+    return count;
 };
