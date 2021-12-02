@@ -13,7 +13,7 @@ const countWindowIncreases = (values: number[], window: number): number => {
     let count = 0;
     for (let i = window; i < values.length; i++) {
         // Only compare values at edges (not overlapping).
-        if (values[i] > values[i-window]) count++;
+        if (values[i] > values[i - window]) count++;
     }
     return count;
 };
